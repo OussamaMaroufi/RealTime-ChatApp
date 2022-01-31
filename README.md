@@ -8,5 +8,19 @@
 
     2. async_to_sync - takes an async function and returns a sync function
 
-    
+# Channel Layer:
+    -A channel layer is a kind of a communication system, which allows multiple parts of our application to exchange messages, without shuttling all the messages or events through the database.
+
+    --we'll use a production-ready layer, RedisChannelLayer.
+    ==>Run this commande :(env)$ docker run -p 6379:6379 -d redis:5
+
+    -This command downloads the image and spins up a Redis Docker container on port 6379.
+
+# To connect to Redis from Django, we need to install an additional package called channels_redis:
+    -(env)$ pip install channels_redis==3.3.1
+
+
+
+
+
 
