@@ -19,6 +19,10 @@
 # To connect to Redis from Django, we need to install an additional package called channels_redis:
     -(env)$ pip install channels_redis==3.3.1
 
+# Channels Consumer  :
+    -A consumer is the basic unit of Channels code. They are tiny ASGI applications, driven by events. They are akin to Django views. However, unlike Django views, consumers are long-running by default. A Django project can have multiple consumers that are combined using Channels routing (which we'll take a look at in the next section).
+
+    Each consumer has it's own scope, which is a set of details about a single incoming connection. They contain pieces of data like protocol type, path, headers, routing arguments, user agent, and more.
 
 
 
