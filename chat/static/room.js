@@ -24,6 +24,8 @@ function onlineUsersSelectorRemove(value) {
     if (oldOption !== null) oldOption.remove();
 }
 
+//to choose the online that we are gonna send a message 
+
 // focus 'chatMessageInput' when user opens the page
 chatMessageInput.focus();
 
@@ -88,6 +90,14 @@ function connect() {
                 chatLog.value += data.user + " left the room.\n";
                 onlineUsersSelectorRemove(data.user);
                 break;
+            case "private_message":
+                chatLog.value += "PM from " + data.user + ": " + data.message + "\n";
+                break;
+
+            case "private_message_delivered":
+                chatLog.value += "PM to " + data.target + ": " + data.message + "\n";
+                break;
+
 
 
 
@@ -109,6 +119,11 @@ function connect() {
 connect();
 
 
+onlineUsersSelector.onchange = function () {
+    chatMessageInput.value = "/pm " + onlineUsersSelector.value + " ";
+    onlineUsersSelector.value = null;
+    chatMessageInput.focus();
+};
 
 
 

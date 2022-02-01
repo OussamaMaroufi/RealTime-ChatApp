@@ -42,6 +42,11 @@ class ChatConsumer(WebsocketConsumer):
         }))
 
         if self.user.is_authenticated:
+            # create a user inbox for private messaging
+            async_to_sync(self.channel_layer.group_add)(
+                self.user_inbox,
+                self.channel_name,
+            )
             # send the join event to the room
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
@@ -52,19 +57,22 @@ class ChatConsumer(WebsocketConsumer):
             )
             self.room.online.add(self.user)
 
-            # create a user inbox for private messaging
-            async_to_sync(self.channel_layer.group_add)(
-                self.user_inbox,
-                self.channel_name,
-            )
 
     def disconnect(self, close_code):
+        
         async_to_sync(self.channel_layer.group_discard)(
             self.room_group_name,
             self.channel_name,
         )
 
         if self.user.is_authenticated:
+
+            # delete the user inbox for private messages 
+            async_to_sync(self.channel_layer.group_add)(
+                self.user_inbox,
+                self.channel_name,
+            )
+
             # send the leave event to the room
             async_to_sync(self.channel_layer.group_send)(
                 self.room_group_name,
@@ -74,12 +82,6 @@ class ChatConsumer(WebsocketConsumer):
                 }
             )
             self.room.online.remove(self.user)
-
-            # delete the user inbox for private messages 
-            async_to_sync(self.channel_layer.group_discard)(
-                self.user_inbox,
-                self.channel_name,
-            )
 
     def receive(self, text_data=None, bytes_data=None):
         text_data_json = json.loads(text_data)
@@ -140,4 +142,9 @@ class ChatConsumer(WebsocketConsumer):
         self.send(text_data=json.dumps(event))
 
     def user_leave(self, event):
+        self.send(text_data=json.dumps(event))
+
+    def private_message(self, event):
+        self.send(text_data=json.dumps(event))
+    def private_message_delivered(self, event):
         self.send(text_data=json.dumps(event))
