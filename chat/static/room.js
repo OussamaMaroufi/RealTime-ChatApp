@@ -38,7 +38,7 @@ chatMessageInput.onkeyup = function (e) {
 chatMessageSend.onclick = function () {
     if (chatMessageInput.value.length === 0) return;
 
-    //send msg to grp layer 
+    //send msg to grp layer afetr this the msg will brodcasted to all member in the same grp 
     chatSocket.send(JSON.stringify({
         "message": chatMessageInput.value,
     }));
@@ -47,7 +47,6 @@ chatMessageSend.onclick = function () {
 };
 
 //Here integrate websocket
-
 
 let chatSocket = null;
 function connect() {
@@ -65,7 +64,7 @@ function connect() {
         }, 2000);
     };
 
-    //this event launched after msg difff from socket to the group 
+    //this event launched after msg difff from socket to the group  
 
     chatSocket.onmessage = function (e) {
         const data = JSON.parse(e.data);

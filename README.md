@@ -43,7 +43,33 @@
 
 # Authentication : 
     -Channels comes with a built-in class for Django session and authentication management called AuthMiddlewareStack.
-    
+
+    -Now, whenever an authenticated client joins, the user object will be added to the scope.
+    it an be accessed by : user = self.scope['user']
+
+# Private Messaging : 
+
+    The Channels package doesn't allow direct filtering, so there's no built-in method for sending messages from a client to another client. With Channels you can either send a message to:
+
+    1-  The consumer's client (self.send)
+    2-  A channel layer group (self.channel_layer.group_send)
+
+    Thus, in order to implement private messaging, we'll:
+
+    1-Create a new group called inbox_%USERNAME% every time a client joins.
+    2-Add the client to their own inbox group (inbox_%USERNAME%).
+    3-Remove the client from their inbox group (inbox_%USERNAME%) when they disconnect.
+
+    Once implemented, each client will have their own inbox for private messages. Other clients can then send private messages to inbox_%TARGET_USERNAME%
+
+
+
+
+
+
+
+
+
 
 
 
