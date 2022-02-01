@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chat.apps.ChatConfig',
-    'channels'
+    'channels',
 
 
 ]
@@ -85,14 +85,22 @@ DATABASES = {
 }
 
 #Configure channel Layer
+# for production :
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [('localhost', 6379)],
         },
     },
 }
+
+#For Testing
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels.layers.InMemoryChannelLayer"
+#     }
+# }
 
 
 # Password validation
