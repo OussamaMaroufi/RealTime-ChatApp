@@ -20,10 +20,12 @@ class ChatConsumer(WebsocketConsumer):
         self.room_group_name = f'chat_{self.room_name}'
         self.room = Room.objects.get(name=self.room_name)
 
+        #Here we can make some logic to accept connection 
+
         # connection has to be accepted
         self.accept()
 
-        # join the room group
+        # join the room group 
         async_to_sync(self.channel_layer.group_add)(
             self.room_group_name,
             self.channel_name,

@@ -20,9 +20,17 @@
     -(env)$ pip install channels_redis==3.3.1
 
 # Channels Consumer  :
-    -A consumer is the basic unit of Channels code. They are tiny ASGI applications, driven by events. They are akin to Django views. However, unlike Django views, consumers are long-running by default. A Django project can have multiple consumers that are combined using Channels routing (which we'll take a look at in the next section).
+    -A consumer is the basic unit of Channels code. They are tiny ASGI applications, driven by events. They are akin to Django views. However, unlike Django views, consumers are long-running by default. A Django project can have multiple consumers that are combined using Channels routing .
 
     Each consumer has it's own scope, which is a set of details about a single incoming connection. They contain pieces of data like protocol type, path, headers, routing arguments, user agent, and more.
+     
+
+-- Since WebsocketConsumer is a synchronous consumer, we had to call async_to_sync when working with the channel layer.
+
+# Channels Routing :
+    Channels provides different routing classes which allow us to combine and stack consumers. They are similar to Django's URLs.
+    
+
 
 
 
