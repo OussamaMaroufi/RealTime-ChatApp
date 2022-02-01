@@ -37,7 +37,8 @@ chatMessageInput.onkeyup = function(e) {
 // clear the 'chatMessageInput' and forward the message
 chatMessageSend.onclick = function() {
     if (chatMessageInput.value.length === 0) return;
-    
+
+    //send msg to grp layer 
     chatSocket.send(JSON.stringify({
         "message": chatMessageInput.value,
     }));
@@ -63,6 +64,9 @@ function connect() {
             connect();
         }, 2000);
     };
+
+    //this event launched after msg difff from socket to the group 
+
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         console.log(data);

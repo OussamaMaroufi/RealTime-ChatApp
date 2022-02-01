@@ -41,6 +41,10 @@
     onmessage - called when a WebSocket receives a message
     onerror - called when a WebSocket encounters an error
 
+# Authentication : 
+    -Channels comes with a built-in class for Django session and authentication management called AuthMiddlewareStack.
+    
+
 
 
 
