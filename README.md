@@ -29,7 +29,19 @@
 
 # Channels Routing :
     Channels provides different routing classes which allow us to combine and stack consumers. They are similar to Django's URLs.
-    
+
+# WebSockets (frontend) : 
+
+    -To communicate with Channels from the frontend, we'll use the WebSocket API.
+
+    WebSockets are extremely easy to use. First, you need to establish a connection by providing a url and then you can listen for the following events:
+
+    onopen - called when a WebSocket connection is established
+    onclose - called when a WebSocket connection is destroyed
+    onmessage - called when a WebSocket receives a message
+    onerror - called when a WebSocket encounters an error
+
+
 
 
 
